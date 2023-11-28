@@ -2,6 +2,44 @@
 
 # ls /etc/netplan
 # 00-ethernet.yaml  00-installer-config.yaml.BACKUP  01-wifi.yaml  bad
+#
+# esce dallo script
+#
+function die()
+{
+    local messages=( "${@}" )
+    local message
+
+    for message in "${messages[@]}"
+    do
+        echo "FATAL | ${message}"
+    done
+    echo "FATAL | Termino programma"
+    # echo "FATAL | per consultare log aprire: ${LOGFILE}"
+    # echo "FATAL | * * * * PER ASSISTENZA MANDARE file '$(basename ${LOGFILE})' * * * *"
+    exit 1
+}
+
+SCRIPTPATH="$(dirname "${0}")"              # percorso script == percorso dati
+echo SCRIPTPATH=$SCRIPTPATH
+CONFIGPATH="${SCRIPTPATH}"                  # percorso dati == percorso script
+INCLUDEPATH="${SCRIPTPATH}"                 # percorso dati == percorso script
+#############################################################################
+#
+# CONFIGURAZIONE AMBIENTE
+#
+#############################################################################
+CONFIG="${CONFIGPATH}/config.include"
+. "${CONFIG}" || die "impossibile caricare ${CONFIG}"
+#############################################################################
+#
+# FUNZIONI
+#
+#############################################################################
+INCLUDE="${INCLUDEPATH}/functions.include"
+. "${INCLUDE}" || die "impossibile caricare ${INCLUDE}"
+
+exit
 
 NETPLAN_PATH=/etc/netplan
 ETH_FILENAME=00-ethernet.yaml
@@ -25,6 +63,33 @@ function status()
 	wifi_status
 }
 
+function get_options()
+{
+    while getopts ":i:" opt
+    do
+        case "${opt}" in
+            i)
+                echo "-i ${OPTARG}"
+            ;;
+            \?)
+                # errore opzione non prevista
+                get_help
+                die "opzione non riconosciuta: -${opt}"
+            ;;
+            :)
+                # errore parametro mancante
+                get_help
+                die "l'opzione -${OPTARG} richiede un parametro"
+            ;;
+        esac
+    done
+    shift "$((OPTIND-1))"
+}
+
+echo "${0}: param num ${#}"
+echo "${0}: params ${@}"
+
+get_options ${@}
 
 echo "${0}: param num ${#}"
 echo "${0}: params ${@}"
