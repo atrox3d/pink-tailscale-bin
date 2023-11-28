@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# ls /etc/netplan
+# 00-ethernet.yaml  00-installer-config.yaml.BACKUP  01-wifi.yaml  bad
+
+NETPLAN_PATH=/etc/netplan
+ETH_FILENAME=00-ethernet.yaml
+WIFI_FILENAME=01-wifi.yaml
+
+ETH="${NETPLAN_PATH}/${ETH_FILENAME}"
+WIFI="${NETPLAN_PATH}/${WIFI_FILENAME}"
+
+function eth_status()
+{
+	if [ -f ${ETH} ]
+	then
+		echo "ethernet is ACTIVATED in netplan"
+	else
+		echo "ethernet is DEACTIVATED in netplan"
+	fi
+}
+
+function wifi_status()
+{
+	if [ -f ${WIFI} ]
+	then
+		echo "wifi is ACTIVATED in netplan"
+	else
+		echo "wifi is DEACTIVATED in netplan"
+	fi
+}
+
+function status()
+{
+	echo "NETPLAN connection status:"
+	eth_status
+	wifi_status
+}
+
+
+echo "${0}: param num ${#}"
+echo "${0}: params ${@}"
+
+if [ ${#} -eq 0 ]
+then
+	status
+fi
