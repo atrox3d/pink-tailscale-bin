@@ -5,7 +5,9 @@ function get_status()
 	local config=${1}
 	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
 }
+
 function wifi_status() { echo "wifi is $(get_status ${WIFI}) in netplan"; }
+
 function eth_status() { echo "eth is $(get_status ${ETH}) in netplan"; }
 
 function status()

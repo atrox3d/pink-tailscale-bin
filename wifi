@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# ls /etc/netplan
-# 00-ethernet.yaml  00-installer-config.yaml.BACKUP  01-wifi.yaml  bad
 #
 # esce dallo script
 #
@@ -38,9 +36,6 @@ CONFIG="${CONFIGPATH}/config.include"
 #############################################################################
 INCLUDE="${INCLUDEPATH}/functions.include"
 . "${INCLUDE}" || die "impossibile caricare ${INCLUDE}"
-
-exit
-
 
 echo "${0}: param num ${#}"
 echo "${0}: params ${@}"
