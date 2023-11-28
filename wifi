@@ -41,50 +41,6 @@ INCLUDE="${INCLUDEPATH}/functions.include"
 
 exit
 
-NETPLAN_PATH=/etc/netplan
-ETH_FILENAME=00-ethernet.yaml
-WIFI_FILENAME=01-wifi.yaml
-
-ETH="${NETPLAN_PATH}/${ETH_FILENAME}"
-WIFI="${NETPLAN_PATH}/${WIFI_FILENAME}"
-
-function get_status() 
-{	
-	local config=${1}
-	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
-}
-function wifi_status() { echo "wifi is $(get_status ${WIFI}) in netplan"; }
-function eth_status() { echo "eth is $(get_status ${ETH}) in netplan"; }
-
-function status()
-{
-	echo "NETPLAN connection status:"
-	eth_status
-	wifi_status
-}
-
-function get_options()
-{
-    while getopts ":i:" opt
-    do
-        case "${opt}" in
-            i)
-                echo "-i ${OPTARG}"
-            ;;
-            \?)
-                # errore opzione non prevista
-                get_help
-                die "opzione non riconosciuta: -${opt}"
-            ;;
-            :)
-                # errore parametro mancante
-                get_help
-                die "l'opzione -${OPTARG} richiede un parametro"
-            ;;
-        esac
-    done
-    shift "$((OPTIND-1))"
-}
 
 echo "${0}: param num ${#}"
 echo "${0}: params ${@}"

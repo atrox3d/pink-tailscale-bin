@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+function get_status() 
+{	
+	local config=${1}
+	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
+}
+function wifi_status() { echo "wifi is $(get_status ${WIFI}) in netplan"; }
+function eth_status() { echo "eth is $(get_status ${ETH}) in netplan"; }
+
+function status()
+{
+	echo "NETPLAN connection status:"
+	eth_status
+	wifi_status
+}
+
+function get_options()
+{
+    while getopts ":i:" opt
+    do
+        case "${opt}" in
+            i)
+                echo "-i ${OPTARG}"
+            ;;
+            \?)
+                # errore opzione non prevista
+                get_help
+                die "opzione non riconosciuta: -${opt}"
+            ;;
+            :)
+                # errore parametro mancante
+                get_help
+                die "l'opzione -${OPTARG} richiede un parametro"
+            ;;
+        esac
+    done
+    shift "$((OPTIND-1))"
+}
+
