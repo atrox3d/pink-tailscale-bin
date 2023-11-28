@@ -10,25 +10,13 @@ WIFI_FILENAME=01-wifi.yaml
 ETH="${NETPLAN_PATH}/${ETH_FILENAME}"
 WIFI="${NETPLAN_PATH}/${WIFI_FILENAME}"
 
-function eth_status()
-{
-	if [ -f ${ETH} ]
-	then
-		echo "ethernet is ACTIVATED in netplan"
-	else
-		echo "ethernet is DEACTIVATED in netplan"
-	fi
+function get_status() 
+{	
+	local config=${1}
+	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
 }
-
-function wifi_status()
-{
-	if [ -f ${WIFI} ]
-	then
-		echo "wifi is ACTIVATED in netplan"
-	else
-		echo "wifi is DEACTIVATED in netplan"
-	fi
-}
+function wifi_status() { echo "wifi is $(get_status ${WIFI}) in netplan"; }
+function eth_status() { echo "eth is $(get_status ${ETH}) in netplan"; }
 
 function status()
 {
@@ -44,4 +32,10 @@ echo "${0}: params ${@}"
 if [ ${#} -eq 0 ]
 then
 	status
+elif [ ${1,,} = on ]
+then
+	echo "set wifi on"
+elif [ ${1,,} = off ]
+then
+	echo "set wifi off"
 fi
