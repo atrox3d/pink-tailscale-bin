@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+#
+# help dello script
+#
+function get_help()
+{
+    # echo "SINTASSI | ${0} -[ionh]"
+    # echo "SINTASSI | -h questo help"
+    # echo "SINTASSI | -i input file"
+    # echo "SINTASSI | -o output file"
+    # echo "SINTASSI | -n nuova installazione"
+    echo "TODO: options.include::get_help"
+}
+
+
+function get_options()
+{
+	echo "get_options: \$@ = $@"
+    while getopts ":i:" opt
+    do
+        case "${opt}" in
+            i)
+                echo "-i ${OPTARG}"
+            ;;
+            \?)
+                # errore opzione non prevista
+                get_help
+                die "opzione non riconosciuta: -${opt}"
+            ;;
+            :)
+                # errore parametro mancante
+                get_help
+                die "l'opzione -${OPTARG} richiede un parametro"
+            ;;
+        esac
+    done
+    shift "$((OPTIND-1))"
+	echo "get_options: \$@ = $@"
+}
