@@ -45,6 +45,8 @@ get_options ${@}
 echo "${0}: param num ${#}"
 echo "${0}: params ${@}"
 
+exit
+
 if [ ${#} -eq 0 ]
 then
 	status

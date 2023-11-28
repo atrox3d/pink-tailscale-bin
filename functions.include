@@ -1,42 +1,20 @@
 #!/usr/bin/env bash
 
-function get_status() 
-{	
-	local config=${1}
-	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
-}
+INCLUDES=(options.include wifi.include)
 
-function wifi_status() { echo "wifi is $(get_status ${WIFI}) in netplan"; }
-
-function eth_status() { echo "eth is $(get_status ${ETH}) in netplan"; }
-
-function status()
+for include in ${INCLUDES[@]}
+do
+    echo "loading ${INCLUDEPATH}/${include}..."
+    . ${INCLUDEPATH}/${include} || die "impossibile caricare ${INCLUDEPATH}/${include}"
+done
+#
+# stampa timestamp corrente
+#
+function timestamp()
 {
-	echo "NETPLAN connection status:"
-	eth_status
-	wifi_status
+    echo "$(date '+%Y/%m/%d-%H:%M:%S')"
 }
-
-function get_options()
-{
-    while getopts ":i:" opt
-    do
-        case "${opt}" in
-            i)
-                echo "-i ${OPTARG}"
-            ;;
-            \?)
-                # errore opzione non prevista
-                get_help
-                die "opzione non riconosciuta: -${opt}"
-            ;;
-            :)
-                # errore parametro mancante
-                get_help
-                die "l'opzione -${OPTARG} richiede un parametro"
-            ;;
-        esac
-    done
-    shift "$((OPTIND-1))"
-}
+#
+# cancella file dati in chiaro
+#
 
