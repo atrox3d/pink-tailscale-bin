@@ -37,23 +37,28 @@ CONFIG="${CONFIGPATH}/config.include"
 INCLUDE="${INCLUDEPATH}/functions.include"
 . "${INCLUDE}" || die "impossibile caricare ${INCLUDE}"
 
-echo "${0}: param num ${#}"
-echo "${0}: params ${@}"
+function main()
+{
+    echo "${0}: param num ${#}"
+    echo "${0}: params ${@}"
 
-get_options ${@}
+    get_options ${@}
 
-echo "${0}: param num ${#}"
-echo "${0}: params ${@}"
+    echo "${0}: param num ${#}"
+    echo "${0}: params ${@}"
 
-exit
+    exit
 
-if [ ${#} -eq 0 ]
-then
-	status
-elif [ ${1,,} = on ]
-then
-	echo "set wifi on"
-elif [ ${1,,} = off ]
-then
-	echo "set wifi off"
-fi
+    if [ ${#} -eq 0 ]
+    then
+        status
+    elif [ ${1,,} = on ]
+    then
+        echo "set wifi on"
+    elif [ ${1,,} = off ]
+    then
+        echo "set wifi off"
+    fi
+}
+
+main
