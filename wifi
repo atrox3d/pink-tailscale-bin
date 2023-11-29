@@ -53,12 +53,22 @@ function main()
     if [ ${#} -eq 0 ]
     then
         status
-    elif [ ${1,,} = on ]
-    then
-        echo "set wifi on"
-    elif [ ${1,,} = off ]
-    then
-        echo "set wifi off"
+    else
+        case ${1,,} in
+            status)
+                status
+            ;;
+            wifi)
+                echo wifi...
+            ;;
+            eth)
+                echo eth...
+            ;;
+            *)
+                die "errore nei parametri"
+            ;;
+        esac
+
     fi
 }
 
