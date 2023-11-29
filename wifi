@@ -39,16 +39,15 @@ INCLUDE="${INCLUDEPATH}/functions.include"
 
 function main()
 {
-    echo info main
     info main
 
-    echo "${0}: param num ${#}"
-    echo "${0}: params ${@}"
+    info "${0}: param num ${#}"
+    info "${0}: params ${@}"
 
-    get_options ${@}
+    get_options "${@}"
 
-    echo "${0}: param num ${#}"
-    echo "${0}: params ${@}"
+    info "${0}: param num ${#}"
+    info "${0}: params ${@}"
 
     exit
 
@@ -64,4 +63,4 @@ function main()
     fi
 }
 
-main
+main "${@}"

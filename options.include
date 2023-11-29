@@ -10,12 +10,13 @@ function get_help()
     # echo "SINTASSI | -i input file"
     # echo "SINTASSI | -o output file"
     # echo "SINTASSI | -n nuova installazione"
-    echo "TODO: options.include::get_help"
+    echo "WARNING !! TODO: options.include::get_help"
 }
 
 
 function get_options()
 {
+    echo "WARNING !! TODO: options.include::get_options: fix main parameters update with shift"
 	echo "get_options: \$@ = $@"
     while getopts ":i:" opt
     do
