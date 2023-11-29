@@ -39,6 +39,9 @@ INCLUDE="${INCLUDEPATH}/functions.include"
 
 function main()
 {
+    echo info main
+    info main
+
     echo "${0}: param num ${#}"
     echo "${0}: params ${@}"
 
