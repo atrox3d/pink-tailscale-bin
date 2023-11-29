@@ -49,8 +49,6 @@ function main()
     info "${0}: param num ${#}"
     info "${0}: params ${@}"
 
-    exit
-
     if [ ${#} -eq 0 ]
     then
         status
