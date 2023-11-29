@@ -44,7 +44,8 @@ function main()
     info "${0}: param num ${#}"
     info "${0}: params ${@}"
 
-    get_options "${@}"
+    # get_options "${@}"
+    . ${INCLUDEPATH}/options.include
 
     info "${0}: param num ${#}"
     info "${0}: params ${@}"
