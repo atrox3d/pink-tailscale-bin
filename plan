@@ -50,26 +50,35 @@ function main()
     # info "${0}: param num ${#}"
     # info "${0}: params ${@}"
 
+    INTERFACE='UNKNOWN INTERFACE'
+
     if [ ${#} -eq 0 ]
     then
         status
+        exit
     else
         case ${1,,} in
             status)
                 status
+                exit
             ;;
             wifi)
-                echo wifi...
+                INTERFACE=wifi
             ;;
             eth)
-                echo eth...
+                INTERFACE=eth
+            ;;
+            help)
+                get_help
+                exit
             ;;
             *)
-                die "errore nei parametri"
+                get_help
+                die "errore nei parametri: ${@}"
             ;;
         esac
-
     fi
+    info INTERFACE=${INTERFACE}
 }
 
 main "${@}"
