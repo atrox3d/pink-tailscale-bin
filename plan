@@ -41,14 +41,14 @@ function main()
 {
     info main
 
-    info "${0}: param num ${#}"
-    info "${0}: params ${@}"
+    # info "${0}: param num ${#}"
+    # info "${0}: params ${@}"
 
     # get_options "${@}"
     . ${INCLUDEPATH}/options.include
 
-    info "${0}: param num ${#}"
-    info "${0}: params ${@}"
+    # info "${0}: param num ${#}"
+    # info "${0}: params ${@}"
 
     if [ ${#} -eq 0 ]
     then

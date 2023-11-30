@@ -6,13 +6,13 @@ function get_status()
 	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
 }
 
-function wifi_status() { echo "wifi is $(get_status ${WIFI}) in netplan"; }
+function wifi_status() { info "wifi is $(get_status ${WIFI}) in netplan"; }
 
-function eth_status() { echo "eth is $(get_status ${ETH}) in netplan"; }
+function eth_status() { info "eth is $(get_status ${ETH}) in netplan"; }
 
 function status()
 {
-	echo "NETPLAN connection status:"
+	info "NETPLAN connection status:"
 	eth_status
 	wifi_status
 }
