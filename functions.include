@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INCLUDES=(wifi.include logger.include)
+INCLUDES=(interfaces.include logger.include)
 
 for include in ${INCLUDES[@]}
 do
