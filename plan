@@ -57,7 +57,8 @@ function main()
         status
         exit
     else
-        case ${1,,} in
+        COMMAND=${1,,}
+        case ${COMMAND} in
             status)
                 status
                 exit
@@ -81,6 +82,22 @@ function main()
     info INTERFACE=${INTERFACE}
 
     [ ${#} -ge 2 ] || { get_help;die "missing parameter for ${INTERFACE}"; }
+
+    SUBCOMMAND=${2,,}
+    case ${SUBCOMMAND} in
+        status)
+            ${INTERFACE}_status
+        ;;
+        on)
+            info turn on ${INTERFACE}
+        ;;
+        off)
+            info turn off ${INTERFACE}
+        ;;
+        *)
+            die "unknown subcommand: ${SUBCOMMAND}"
+        ;;
+    esac
 }
 
 main "${@}"
