@@ -92,7 +92,7 @@ function main()
             info turn on ${INTERFACE}
         ;;
         off)
-            if [ eth_isactive ]
+            if eth_isactive
             then
                 info turn off ${INTERFACE}
             else
