@@ -10,10 +10,10 @@ done
 #
 # stampa timestamp corrente
 #
-function timestamp()
-{
-    echo "$(date '+%Y/%m/%d-%H:%M:%S')"
-}
+# function timestamp()
+# {
+#     echo "$(date '+%Y/%m/%d-%H:%M:%S')"
+# }
 #
 # cancella file dati in chiaro
 #
