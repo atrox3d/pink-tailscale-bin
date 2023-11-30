@@ -79,6 +79,8 @@ function main()
         esac
     fi
     info INTERFACE=${INTERFACE}
+
+    [ ${#} -ge 2 ] || { get_help;die "missing parameter for ${INTERFACE}"; }
 }
 
 main "${@}"
