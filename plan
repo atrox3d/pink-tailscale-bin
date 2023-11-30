@@ -92,7 +92,12 @@ function main()
             info turn on ${INTERFACE}
         ;;
         off)
-            info turn off ${INTERFACE}
+            if [ eth_isactive ]
+            then
+                info turn off ${INTERFACE}
+            else
+                error eth is not active
+            fi
         ;;
         *)
             die "unknown subcommand: ${SUBCOMMAND}"
