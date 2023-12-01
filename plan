@@ -98,12 +98,13 @@ function main()
             else
                 other_interface=wifi
             fi
-
+            info "checking if ${other_interface} is on"
             if ${other_interface}_isactive
             then
                 info turn off ${INTERFACE}
             else
                 error "${other_interface} is not active"
+                die "at least one interface must be on"
             fi
         ;;
         *)
