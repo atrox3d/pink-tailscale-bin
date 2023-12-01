@@ -92,11 +92,18 @@ function main()
             info turn on ${INTERFACE}
         ;;
         off)
-            if ${INTERFACE}_isactive
+            if [ ${INTERFACE} = wifi ]
+            then
+                other_interface=eth
+            else
+                other_interface=wifi
+            fi
+
+            if ${other_interface}_isactive
             then
                 info turn off ${INTERFACE}
             else
-                error eth is not active
+                error "${other_interface} is not active"
             fi
         ;;
         *)
