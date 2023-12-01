@@ -50,6 +50,11 @@ function main()
     # info "${0}: param num ${#}"
     # info "${0}: params ${@}"
 
+    debug "ETH_ENABLED=$ETH_ENABLED"
+    debug "ETH_DISABLED=$ETH_DISABLED"
+    debug "WIFI_ENABLED=$WIFI_ENABLED"
+    debug "WIFI_DISABLED=$WIFI_DISABLED"
+
     INTERFACE='UNKNOWN INTERFACE'
 
     if [ ${#} -eq 0 ]
