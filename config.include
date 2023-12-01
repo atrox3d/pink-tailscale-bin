@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 
-NETPLAN_PATH=/etc/netplan
-ETH_FILENAME=00-ethernet.yaml
-WIFI_FILENAME=01-wifi.yaml
+# NETPLAN_PATH=/etc/netplan
+# ETH_FILENAME=00-ethernet.yaml
+# WIFI_FILENAME=01-wifi.yaml
 
-ETH="${NETPLAN_PATH}/${ETH_FILENAME}"
-WIFI="${NETPLAN_PATH}/${WIFI_FILENAME}"
+# ETH_PATH="${NETPLAN_PATH}/${ETH_FILENAME}"
+# WIFI_PATH="${NETPLAN_PATH}/${WIFI_FILENAME}"

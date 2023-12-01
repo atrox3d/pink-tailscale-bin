@@ -108,7 +108,7 @@ function main()
             fi
         ;;
         *)
-            die "unknown subcommand: ${SUBCOMMAND}"
+            die "${COMMAND}: unknown subcommand: ${SUBCOMMAND}"
         ;;
     esac
 }

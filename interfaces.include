@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+NETPLAN_PATH=/etc/netplan
+
+ETH_FILENAME=00-ethernet.yaml
+WIFI_FILENAME=01-wifi.yaml
+
+ETH_ENABLED_PATH="${NETPLAN_PATH}/${ETH_FILENAME}"
+WIFI_ENABLED_PATH="${NETPLAN_PATH}/${WIFI_FILENAME}"
+
 function get_status() 
 {	
 	local config=${1}
@@ -8,8 +16,8 @@ function get_status()
 
 function wifi_isactive() 
 { 
-	debug wifi_isactive WIFI=${WIFI}
-	if [ $(get_status ${WIFI}) = ACTIVATED ]
+	debug wifi_isactive WIFI=${WIFI_ENABLED_PATH}
+	if [ $(get_status ${WIFI_ENABLED_PATH}) = ACTIVATED ]
 	then
 		debug "wifi_isactive: true"
 		true
