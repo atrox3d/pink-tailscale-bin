@@ -8,17 +8,12 @@ WIFI_FILENAME=01-wifi.yaml
 ETH_ENABLED_PATH="${NETPLAN_PATH}/${ETH_FILENAME}"
 WIFI_ENABLED_PATH="${NETPLAN_PATH}/${WIFI_FILENAME}"
 
-function get_status() 
-{	
-	local config=${1}
-	[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }
-}
+function get_status() {	local config=${1};[ -f ${config} ] && { echo "ACTIVATED"; } || { echo "DEACTIVATED"; }; }
 
 function wifi_isactive() { [ $(get_status ${WIFI_ENABLED_PATH}) = ACTIVATED ] && true || false; }
 function eth_isactive()  { [ $(get_status ${ETH_ENABLED_PATH})  = ACTIVATED ] && true || false; }
 
 function wifi_status() { info "wifi is $(get_status ${WIFI_ENABLED_PATH}) in netplan"; }
-
 function eth_status() { info "eth is $(get_status ${ETH_ENABLED_PATH}) in netplan"; }
 
 function status()
