@@ -91,12 +91,14 @@ function main()
         on)
             info turn on ${INTERFACE}
             enable_interface ${INTERFACE}
+            status
         ;;
         off)
             if check_other_interface ${INTERFACE}
             then
         		info turn off ${INTERFACE}
                 disable_interface ${INTERFACE}
+                status
             else
         		die "at least one interface must be on"
             fi
