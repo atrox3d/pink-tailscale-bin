@@ -43,10 +43,10 @@ function main()
 {
     info main
     . ${INCLUDEPATH}/options.include
-    debug "ETH_ENABLED=$ETH_ENABLED"
-    debug "ETH_DISABLED=$ETH_DISABLED"
-    debug "WIFI_ENABLED=$WIFI_ENABLED"
-    debug "WIFI_DISABLED=$WIFI_DISABLED"
+    # debug "ETH_ENABLED=$ETH_ENABLED"
+    # debug "ETH_DISABLED=$ETH_DISABLED"
+    # debug "WIFI_ENABLED=$WIFI_ENABLED"
+    # debug "WIFI_DISABLED=$WIFI_DISABLED"
 
     INTERFACE='UNKNOWN INTERFACE'
 

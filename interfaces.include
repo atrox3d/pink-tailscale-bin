@@ -67,20 +67,20 @@ function enable_interface()
 		WIFI|ETH)
 			_v_enabled=${_interface}_ENABLED
 			_enabled=${!_v_enabled}
-			debug _enabled=${_enabled}
+			# debug _enabled=${_enabled}
 
 			_v_disabled=${_interface}_DISABLED
 			_disabled=${!_v_disabled}
-			debug _disabled=${_disabled}
+			# debug _disabled=${_disabled}
 
 			if [ -f ${_enabled} ]
 			then 
 				warn "interface ${_interface,,} is already enabled"
 			elif [ -f ${_disabled} ]
 			then
-				debug sudo mv ${_disabled} ${_enabled}
+				# debug sudo mv ${_disabled} ${_enabled}
 				sudo mv ${_disabled} ${_enabled}
-				debug sudo netplan apply
+				# debug sudo netplan apply
 				sudo netplan apply
 			fi
 		;;
@@ -102,20 +102,20 @@ function disable_interface()
 		WIFI|ETH)
 			_v_enabled=${_interface}_ENABLED
 			_enabled=${!_v_enabled}
-			debug _enabled=${_enabled}
+			# debug _enabled=${_enabled}
 
 			_v_disabled=${_interface}_DISABLED
 			_disabled=${!_v_disabled}
-			debug _disabled=${_disabled}
+			# debug _disabled=${_disabled}
 
 			if [ -f ${_disabled} ]
 			then 
 				warn "interface ${_interface,,} is already disabled"
 			elif [ -f ${_enabled} ]
 			then
-				debug sudo mv ${_enabled} ${_disabled} 
+				# debug sudo mv ${_enabled} ${_disabled} 
 				sudo mv ${_enabled} ${_disabled} 
-				debug sudo netplan apply
+				# debug sudo netplan apply
 				sudo netplan apply
 			fi
 		;;
