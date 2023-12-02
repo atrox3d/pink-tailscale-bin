@@ -5,12 +5,13 @@
 #
 function get_help()
 {
-    info "SYNTAX: ${0} [status] | [wifi|eth status|on|off]"
+    local _script=$(basename ${0})
+    info "SYNTAX: ${_script} [status] | [wifi|eth status|on|off]"
     info "EXAMPLES:"
-    info "${0} status"
-    info "${0} wifi status"
-    info "${0} wifi on"
-    info "${0} eth off"
+    info "${_script} status"
+    info "${_script} wifi status"
+    info "${_script} wifi on"
+    info "${_script} eth off"
 }
 
 
