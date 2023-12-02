@@ -36,7 +36,9 @@ function __DEBUG()
 	[ "${__LOGGER_DEBUG}" == "yes" ] && echo "__DEBUG | ${*}" &> /dev/stderr
 }
 
+LOGGER_WHO_WIDTH=16
 
+function logger_set_who_width { LOGGER_WHO_WIDTH=${1}; }
 
 
 declare -A LOG_LEVELS=( [DEBUG]=0 [INFO]=1 [WARNING]=2 [ERROR]=3 [FATAL]=4 [SUPER]=5)
@@ -161,7 +163,7 @@ function log()
 	
 	# printf -v _level "[%*.*s]" $_log_square_width $_log_square_width "$OPTARG"
 	local _formatted_who
-	printf -v _formatted_who "%16.16s" "$(basename ${_who})"
+	printf -v _formatted_who "%*.*s" ${LOGGER_WHO_WIDTH} ${LOGGER_WHO_WIDTH} "$(basename ${_who})"
 	
 	echo "${_datestamp} | ${_timestamp} | ${_formatted_who} | ${_level} | ${_message}" >&2
 }

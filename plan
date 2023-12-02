@@ -37,6 +37,8 @@ CONFIG="${CONFIGPATH}/config.include"
 INCLUDE="${INCLUDEPATH}/functions.include"
 . "${INCLUDE}" || die "impossibile caricare ${INCLUDE}"
 
+logger_set_who_width 10
+
 function main()
 {
     info main
