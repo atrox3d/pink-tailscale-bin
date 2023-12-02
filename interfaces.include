@@ -61,7 +61,7 @@ function enable_interface()
 	local _interface=${1^^}
 	local _v_enabled _enabled
 
-	debug _interface=${_interface}
+	# debug _interface=${_interface}
 
 	case ${_interface} in
 		WIFI|ETH)
@@ -96,7 +96,7 @@ function disable_interface()
 	local _interface=${1^^}
 	local _v_enabled _enabled
 
-	debug _interface=${_interface}
+	# debug _interface=${_interface}
 
 	case ${_interface} in
 		WIFI|ETH)

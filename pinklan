@@ -41,7 +41,7 @@ logger_set_who_width 10
 
 function main()
 {
-    info main
+    # info main
     . ${INCLUDEPATH}/options.include
     # debug "ETH_ENABLED=$ETH_ENABLED"
     # debug "ETH_DISABLED=$ETH_DISABLED"
@@ -78,7 +78,7 @@ function main()
             ;;
         esac
     fi
-    info INTERFACE=${INTERFACE}
+    # info INTERFACE=${INTERFACE}
 
     [ ${#} -ge 2 ] || { get_help;die "missing parameter for ${INTERFACE}"; }
 
