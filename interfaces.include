@@ -81,6 +81,7 @@ function enable_interface()
 				debug sudo mv ${_disabled} ${_enabled}
 				sudo mv ${_disabled} ${_enabled}
 				debug sudo netplan apply
+				sudo netplan apply
 			fi
 		;;
 		*)
@@ -115,6 +116,7 @@ function disable_interface()
 				debug sudo mv ${_enabled} ${_disabled} 
 				sudo mv ${_enabled} ${_disabled} 
 				debug sudo netplan apply
+				sudo netplan apply
 			fi
 		;;
 		*)
