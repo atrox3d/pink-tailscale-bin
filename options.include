@@ -5,12 +5,12 @@
 #
 function get_help()
 {
-    # echo "SINTASSI | ${0} -[ionh]"
-    # echo "SINTASSI | -h questo help"
-    # echo "SINTASSI | -i input file"
-    # echo "SINTASSI | -o output file"
-    # echo "SINTASSI | -n nuova installazione"
-    echo "WARNING !! TODO: options.include::get_help"
+    info "SYNTAX: ${0} [status] | [wifi|eth status|on|off]"
+    info "EXAMPLES:"
+    info "${0} status"
+    info "${0} wifi status"
+    info "${0} wifi on"
+    info "${0} eth off"
 }
 
 
