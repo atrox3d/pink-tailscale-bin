@@ -28,3 +28,30 @@ function status()
 	eth_status
 	wifi_status
 }
+
+function check_other_interface 
+{
+	local _interface=${1}
+	local other_interface
+
+	if [ ${_interface} = wifi ]
+	then
+		other_interface=eth
+	elif [ ${_interface} = wifi ]
+	then
+		other_interface=wifi
+	else
+		die "unknown interface: ${_interface}"
+	fi
+
+	info "checking if ${other_interface} is on"
+	
+	# at least one interface must be set active
+	if ${other_interface}_isactive
+	then
+		true
+	else
+		error "${other_interface} is not active"
+		false
+	fi
+}

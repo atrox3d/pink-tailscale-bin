@@ -10,9 +10,9 @@ function die()
 
     for message in "${messages[@]}"
     do
-        echo "FATAL | ${message}"
+        type fatal &> /dev/null && fatal "${message}" || echo "FATAL | ${message}"
     done
-    echo "FATAL | Termino programma"
+    type fatal &> /dev/null && fatal "Termino programma" || echo "FATAL | Termino programma"
     # echo "FATAL | per consultare log aprire: ${LOGFILE}"
     # echo "FATAL | * * * * PER ASSISTENZA MANDARE file '$(basename ${LOGFILE})' * * * *"
     exit 1
@@ -62,6 +62,7 @@ function main()
         status
         exit
     else
+        # commands: status, help, wifi <subcommand>, eth <subcommand>
         COMMAND=${1,,}
         case ${COMMAND} in
             status)
@@ -88,6 +89,7 @@ function main()
 
     [ ${#} -ge 2 ] || { get_help;die "missing parameter for ${INTERFACE}"; }
 
+    # subcommands: status, on, off
     SUBCOMMAND=${2,,}
     case ${SUBCOMMAND} in
         status)
@@ -97,19 +99,11 @@ function main()
             info turn on ${INTERFACE}
         ;;
         off)
-            if [ ${INTERFACE} = wifi ]
+            if check_other_interface ${INTERFACE}
             then
-                other_interface=eth
+        		info turn off ${INTERFACE}
             else
-                other_interface=wifi
-            fi
-            info "checking if ${other_interface} is on"
-            if ${other_interface}_isactive
-            then
-                info turn off ${INTERFACE}
-            else
-                error "${other_interface} is not active"
-                die "at least one interface must be on"
+        		die "at least one interface must be on"
             fi
         ;;
         *)
