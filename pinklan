@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+#
+# esce dallo script
+#
+function die()
+{
+    local messages=( "${@}" )
+    local message
+
+    for message in "${messages[@]}"
+    do
+        type fatal &> /dev/null && fatal "${message}" || echo "FATAL | ${message}"
+    done
+    type fatal &> /dev/null && fatal "Termino programma" || echo "FATAL | Termino programma"
+    # echo "FATAL | per consultare log aprire: ${LOGFILE}"
+    # echo "FATAL | * * * * PER ASSISTENZA MANDARE file '$(basename ${LOGFILE})' * * * *"
+    exit 1
+}
+
+SCRIPTPATH="$(dirname "${0}")"              # percorso script == percorso dati
+echo SCRIPTPATH=$SCRIPTPATH
+CONFIGPATH="${SCRIPTPATH}"                  # percorso dati == percorso script
+INCLUDEPATH="${SCRIPTPATH}"                 # percorso dati == percorso script
+#############################################################################
+#
+# CONFIGURAZIONE AMBIENTE
+#
+#############################################################################
+CONFIG="${CONFIGPATH}/config.include"
+. "${CONFIG}" || die "impossibile caricare ${CONFIG}"
+#############################################################################
+#
+# FUNZIONI
+#
+#############################################################################
+INCLUDE="${INCLUDEPATH}/functions.include"
+. "${INCLUDE}" || die "impossibile caricare ${INCLUDE}"
+
+logger_set_who_width 10
+
+function main()
+{
+    info main
+    . ${INCLUDEPATH}/options.include
+    debug "ETH_ENABLED=$ETH_ENABLED"
+    debug "ETH_DISABLED=$ETH_DISABLED"
+    debug "WIFI_ENABLED=$WIFI_ENABLED"
+    debug "WIFI_DISABLED=$WIFI_DISABLED"
+
+    INTERFACE='UNKNOWN INTERFACE'
+
+    if [ ${#} -eq 0 ]
+    then
+        status
+        exit
+    else
+        # commands: status, help, wifi <subcommand>, eth <subcommand>
+        COMMAND=${1,,}
+        case ${COMMAND} in
+            status)
+                status
+                exit
+            ;;
+            wifi)
+                INTERFACE=wifi
+            ;;
+            eth)
+                INTERFACE=eth
+            ;;
+            help)
+                get_help
+                exit
+            ;;
+            *)
+                get_help
+                die "errore nei parametri: ${@}"
+            ;;
+        esac
+    fi
+    info INTERFACE=${INTERFACE}
+
+    [ ${#} -ge 2 ] || { get_help;die "missing parameter for ${INTERFACE}"; }
+
+    # subcommands: status, on, off
+    SUBCOMMAND=${2,,}
+    case ${SUBCOMMAND} in
+        status)
+            ${INTERFACE}_status
+        ;;
+        on)
+            info turn on ${INTERFACE}
+            enable_interface ${INTERFACE}
+        ;;
+        off)
+            if check_other_interface ${INTERFACE}
+            then
+        		info turn off ${INTERFACE}
+                disable_interface ${INTERFACE}
+            else
+        		die "at least one interface must be on"
+            fi
+        ;;
+        *)
+            die "${COMMAND}: unknown subcommand: ${SUBCOMMAND}"
+        ;;
+    esac
+}
+
+main "${@}"
