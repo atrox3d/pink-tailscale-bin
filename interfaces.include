@@ -55,3 +55,70 @@ function check_other_interface
 		false
 	fi
 }
+
+function enable_interface()
+{
+	local _interface=${1^^}
+	local _v_enabled _enabled
+
+	debug _interface=${_interface}
+
+	case ${_interface} in
+		WIFI|ETH)
+			_v_enabled=${_interface}_ENABLED
+			_enabled=${!_v_enabled}
+			debug _enabled=${_enabled}
+
+			_v_disabled=${_interface}_DISABLED
+			_disabled=${!_v_disabled}
+			debug _disabled=${_disabled}
+
+			if [ -f ${_enabled} ]
+			then 
+				warn "interface ${_interface,,} is already enabled"
+			elif [ -f ${_disabled} ]
+			then
+				debug mv ${_disabled} ${_enabled}
+				mv ${_disabled} ${_enabled}
+				debug sudo netplan apply
+			fi
+		;;
+		*)
+			die "unknown interface ${_interface}"
+		;;
+	esac
+}
+
+
+function disable_interface()
+{
+	local _interface=${1^^}
+	local _v_enabled _enabled
+
+	debug _interface=${_interface}
+
+	case ${_interface} in
+		WIFI|ETH)
+			_v_enabled=${_interface}_ENABLED
+			_enabled=${!_v_enabled}
+			debug _enabled=${_enabled}
+
+			_v_disabled=${_interface}_DISABLED
+			_disabled=${!_v_disabled}
+			debug _disabled=${_disabled}
+
+			if [ -f ${_disabled} ]
+			then 
+				warn "interface ${_interface,,} is already disabled"
+			elif [ -f ${_enabled} ]
+			then
+				debug mv ${_enabled} ${_disabled} 
+				mv ${_enabled} ${_disabled} 
+				debug sudo netplan apply
+			fi
+		;;
+		*)
+			die "unknown interface ${_interface}"
+		;;
+	esac
+}
