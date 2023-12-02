@@ -78,8 +78,8 @@ function enable_interface()
 				warn "interface ${_interface,,} is already enabled"
 			elif [ -f ${_disabled} ]
 			then
-				debug mv ${_disabled} ${_enabled}
-				mv ${_disabled} ${_enabled}
+				debug sudo mv ${_disabled} ${_enabled}
+				sudo mv ${_disabled} ${_enabled}
 				debug sudo netplan apply
 			fi
 		;;
@@ -112,8 +112,8 @@ function disable_interface()
 				warn "interface ${_interface,,} is already disabled"
 			elif [ -f ${_enabled} ]
 			then
-				debug mv ${_enabled} ${_disabled} 
-				mv ${_enabled} ${_disabled} 
+				debug sudo mv ${_enabled} ${_disabled} 
+				sudo mv ${_enabled} ${_disabled} 
 				debug sudo netplan apply
 			fi
 		;;
