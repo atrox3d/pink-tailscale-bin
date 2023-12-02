@@ -42,16 +42,7 @@ logger_set_who_width 10
 function main()
 {
     info main
-
-    # info "${0}: param num ${#}"
-    # info "${0}: params ${@}"
-
-    # get_options "${@}"
     . ${INCLUDEPATH}/options.include
-
-    # info "${0}: param num ${#}"
-    # info "${0}: params ${@}"
-
     debug "ETH_ENABLED=$ETH_ENABLED"
     debug "ETH_DISABLED=$ETH_DISABLED"
     debug "WIFI_ENABLED=$WIFI_ENABLED"

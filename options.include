@@ -18,6 +18,7 @@ function get_help()
 # {
 #     echo "WARNING !! TODO: options.include::get_options: fix main parameters update with shift"
 # 	echo "get_options: \$@ = $@"
+    info "parsing options... '${@}'"
     while getopts ":h" opt
     do
         case "${opt}" in
