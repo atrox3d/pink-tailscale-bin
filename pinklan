@@ -18,7 +18,7 @@ function die()
     exit 1
 }
 
-SCRIPTPATH="$(dirname "${0}")"              # percorso script == percorso dati
+SCRIPTPATH="$(dirname "$(readlink -f "$0")")"              # percorso script == percorso dati
 echo SCRIPTPATH=$SCRIPTPATH
 CONFIGPATH="${SCRIPTPATH}"                  # percorso dati == percorso script
 INCLUDEPATH="${SCRIPTPATH}"                 # percorso dati == percorso script
